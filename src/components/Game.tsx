@@ -114,6 +114,13 @@ function Game() {
         }
     }
 
+    function getStartingCenter(): {lat: number, lng: number} {
+        if (gameMode === GamemodeEnum.SVK_EASY || gameMode === GamemodeEnum.SVK_HARD) {
+            return {lat: 48.77559816437337, lng: 19.61552985351171};
+        } else {
+            return {lat: 48.77559816437337, lng: 19.61552985351171};
+    } }
+
     function initMap(): void {
         const mapOptions: google.maps.MapOptions = {
             center: {lat: 48.77559816437337, lng: 19.61552985351171},
@@ -273,6 +280,9 @@ function Game() {
             };
 
             saveRecordToFirestore(user.email, record);
+            map.setCenter(getStartingCenter())
+            map.setZoom(getStartingZoom())
+
         } else {
             console.error("User is not logged in.");
         }

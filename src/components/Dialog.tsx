@@ -187,8 +187,8 @@ export default function DialogDefault({
                             <img src={guessLogo} alt="logo"/>
                         </div>
                         <div ref={mapRef} className="!absolute top-0 left-0 w-full h-full rounded-lg"></div>
-                        <div className=" w-full md:w-[50%] p-5 h-[30%] bottom-0 absolute">
-                            <div className="w-full h-full rounded-lg bg-blue-700 bg-opacity-40 backdrop-blur-lg flex flex-col justify-end items-center p-3">
+                        <div className=" w-full md:w-[50%] p-5 h-[30%] md:left-[50%] md:-translate-x-[50%] bottom-0 absolute">
+                            <div className="w-full h-full rounded-lg bg-blue-700 bg-opacity-40 backdrop-blur-lg flex flex-col justify-center items-center p-3">
                                 <div className="w-[50%] p-3 h-[50%] text-center text-black font-black text-2xl ">
                                     {score} / 5000
                                 </div>

@@ -140,12 +140,6 @@ function Login() {
                                  className="h-4 w-4"/>
                             Google login
                         </Button>
-                        <Typography color="gray" className="mt-4 text-center font-normal">
-                            Ešte nemáš účet? {" "}
-                            <a href="#" className="font-medium text-gray-900">
-                                Zaregistrovať sa
-                            </a>
-                        </Typography>
                     </form>
                     <div className="lg:hidden  w-full ">
                         <div className="h-[1px] w-full border border-gray-300 mb-2 "></div>
