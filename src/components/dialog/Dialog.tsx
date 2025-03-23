@@ -7,9 +7,9 @@ import {
     DialogFooter,
     Progress,
 } from "@material-tailwind/react";
-import {calculateCenter} from "../utils/utils";
-import {GamemodeEnum} from "../utils/GamemodeEnum";
-import guessLogo from '../images/guess-logo.png';
+import {calculateCenter} from "../../utils/utils";
+import {GamemodeEnum} from "../../utils/GamemodeEnum";
+import guessLogo from '../../images/guess-logo.png';
 
 
 interface Props {
@@ -38,7 +38,8 @@ export default function DialogDefault({
     const [isOpen, setIsOpen] = useState<boolean>(showDialog ?? false);
     const [progress, setProgress] = useState<number>(0);
     const mapRef = useRef<HTMLDivElement | null>(null);
-    const triesNum = tries;
+    const MIN = 0;
+    const MAX = 5000;
 
     function handleClose(event: object, reason: string) {
         if (reason && reason === "backdropClick" && "escapeKeyDown") {
@@ -65,11 +66,6 @@ export default function DialogDefault({
                 return 9;
         }
     }
-
-    const [val, setVal] = useState(0);
-    const MIN = 0;
-    const MAX = 5000;
-    const normalise = (value: number) => ((value - MIN) * 100) / (MAX - MIN);
 
     function initMap(): void {
         const mapOptions: google.maps.MapOptions = {
@@ -144,14 +140,13 @@ export default function DialogDefault({
     }
 
     function smoothZoom(targetZoom: number, currentZoom: any) {
-        if (currentZoom >= targetZoom) return; // Stop when reaching the target zoom level
+        if (currentZoom >= targetZoom) return;
 
         map.setZoom(currentZoom);
         setTimeout(() => {
-            smoothZoom(targetZoom, currentZoom + 1); // Increase zoom level gradually
-        }, 100); // Adjust the delay for smoother or faster zoom transition
+            smoothZoom(targetZoom, currentZoom + 1);
+        }, 100);
     }
-
 
     useEffect(() => {
         if (isOpen) {
@@ -187,8 +182,8 @@ export default function DialogDefault({
                             <img src={guessLogo} alt="logo"/>
                         </div>
                         <div ref={mapRef} className="!absolute top-0 left-0 w-full h-full rounded-lg"></div>
-                        <div className=" w-full md:w-[50%] p-5 h-[30%] bottom-0 absolute">
-                            <div className="w-full h-full rounded-lg bg-blue-700 bg-opacity-40 backdrop-blur-lg flex flex-col justify-end items-center p-3">
+                        <div className=" w-full md:w-[50%] p-5 h-[30%] md:left-[50%] md:-translate-x-[50%] bottom-0 absolute">
+                            <div className="w-full h-full rounded-lg bg-blue-700 bg-opacity-40 backdrop-blur-lg flex flex-col justify-center items-center p-3">
                                 <div className="w-[50%] p-3 h-[50%] text-center text-black font-black text-2xl ">
                                     {score} / 5000
                                 </div>

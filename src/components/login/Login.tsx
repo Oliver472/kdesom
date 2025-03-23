@@ -1,12 +1,12 @@
 import {Button, Card, CardBody, CardHeader, Input, Typography} from '@material-tailwind/react'
 import React, { useEffect, useState } from 'react'
-import DifficultyTabs from './DifficultyTabs'
+import DifficultyTabs from '../DifficultyTabs'
 import {useNavigate} from 'react-router-dom'
 import {Checkbox} from '@mui/material'
-import logo from '../images/guess-logo.png';
+import logo from '../../images/guess-logo.png';
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import {app} from '../firebase/firebaseConfig'
+import {app} from '../../firebase/firebaseConfig'
 
 function Login() {
     const apps  = app;
@@ -140,12 +140,6 @@ function Login() {
                                  className="h-4 w-4"/>
                             Google login
                         </Button>
-                        <Typography color="gray" className="mt-4 text-center font-normal">
-                            Ešte nemáš účet? {" "}
-                            <a href="#" className="font-medium text-gray-900">
-                                Zaregistrovať sa
-                            </a>
-                        </Typography>
                     </form>
                     <div className="lg:hidden  w-full ">
                         <div className="h-[1px] w-full border border-gray-300 mb-2 "></div>

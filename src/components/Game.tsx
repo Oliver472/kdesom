@@ -1,37 +1,32 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import arrow from "../images/arrow.png";
+import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import guessLogo from '../images/guess-logo.png';
 import compasss from '../images/compass.png';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { Loader } from "@googlemaps/js-api-loader"
-
 import {setGameActive} from '../redux/slices/GameState'
 import {Button} from '@material-tailwind/react';
-import Dialog from './Dialog';
-import {MapIcon, XCircleIcon, TrophyIcon, SparklesIcon} from '@heroicons/react/24/solid'
+import Dialog from './dialog/Dialog';
+import {MapIcon, XCircleIcon} from '@heroicons/react/24/solid'
 import {GamemodeEnum} from '../utils/GamemodeEnum';
-
 import {PanoramaService} from '../coordinates/Geolocation';
 import MenuList from './MenuList';
 import { getAuth } from 'firebase/auth';
 import { app } from '../firebase/firebaseConfig';
 import { saveRecordToFirestore } from '../api/apiCalls';
-import LeaderBoardDialog from './LeaderBoardDialog';
+import LeaderBoardDialog from './dialog/LeaderBoardDialog';
 import { getGeminiContent, getRandomLatLng } from '../gemini/GeminiApi';
 import AiButton from './AiButton';
+
 let panorama: google.maps.StreetViewPanorama;
 let map: google.maps.Map;
 let service: google.maps.StreetViewService;
 let geocoder:google.maps.Geocoder;
 let panoramaService: PanoramaService ;
 
-
 function Game() {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const auth = getAuth(app);
 
     // State variables
     const [tries, setTries] = useState(1);
@@ -88,24 +83,6 @@ function Game() {
         setIsLeaderBoardDialogOpened(false)
     }
 
-    useEffect(() => {
-        submitedRef.current = submited;
-    }, [submited]);
-
-    useEffect(() => {
-        dispatch(setGameActive(true));
-
-        loader.load().then(() => {
-            service = new google.maps.StreetViewService();
-            geocoder = new google.maps.Geocoder();
-            panoramaService = new PanoramaService(geocoder, service);
-            initMap();
-            initializeStreetView();
-        }).catch((error) => {
-            console.error("Error loading Google Maps API:", error);
-        });
-    }, [gameMode]);
-
     function getStartingZoom() {
         if (gameMode === GamemodeEnum.SVK_EASY || gameMode === GamemodeEnum.SVK_HARD) {
             return 7;
@@ -113,6 +90,13 @@ function Game() {
             return 1.5;
         }
     }
+
+    function getStartingCenter(): {lat: number, lng: number} {
+        if (gameMode === GamemodeEnum.SVK_EASY || gameMode === GamemodeEnum.SVK_HARD) {
+            return {lat: 48.77559816437337, lng: 19.61552985351171};
+        } else {
+            return {lat: 48.77559816437337, lng: 19.61552985351171};
+    } }
 
     function initMap(): void {
         const mapOptions: google.maps.MapOptions = {
@@ -164,7 +148,6 @@ function Game() {
             marker2.setPosition(event.latLng);
         });
     }
-
 
     function initializeStreetView() {
         panorama = new google.maps.StreetViewPanorama(
@@ -273,11 +256,13 @@ function Game() {
             };
 
             saveRecordToFirestore(user.email, record);
+            map.setCenter(getStartingCenter())
+            map.setZoom(getStartingZoom())
+
         } else {
             console.error("User is not logged in.");
         }
     }
-
 
     function handleReset() {
        /* if (tries === 3) {
@@ -312,6 +297,24 @@ function Game() {
     function handleChangeGameMode(dGameMode: GamemodeEnum) {
         setGameMode(dGameMode);
     }
+
+    useEffect(() => {
+        submitedRef.current = submited;
+    }, [submited]);
+
+    useEffect(() => {
+        dispatch(setGameActive(true));
+
+        loader.load().then(() => {
+            service = new google.maps.StreetViewService();
+            geocoder = new google.maps.Geocoder();
+            panoramaService = new PanoramaService(geocoder, service);
+            initMap();
+            initializeStreetView();
+        }).catch((error) => {
+            console.error("Error loading Google Maps API:", error);
+        });
+    }, [gameMode]);
 
     return (
         <div className="App flex flex-col justify-center  items-center w-screen h-screen relative overflow-hidden bg-black">
@@ -385,7 +388,6 @@ function Game() {
             </section>
             <Dialog showDialog={isDialogOpen} closeDialog={handleCloseDialog} posPlayer={markerPos} posResult={sVCoords}
                     handleReset={handleReset} score={roundPoints} tries={tries} gameMode={gameMode}/>
-            <LeaderBoardDialog showDialog={isLeaderBoardDialogOpened} closeDialog={handleCloseLeaderBoardDialog}/>
         </div>
     );
 }

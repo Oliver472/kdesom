@@ -37,7 +37,7 @@ export default function GameResultDialog({showDialog, closeDialog}: Props) {
             <DialogBody className="bg-blue-400">
 
             </DialogBody>
-            <DialogFooter className="bg-blue-400 rounded-b-md flex justify-center">
+            <DialogFooter className="bg-blue-500 rounded-b-md flex justify-center">
                 <Button className="w-52" >GG</Button>
             </DialogFooter>
         </Dialog>
