@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
-import Header from './components/layout/Header'
-import {increment} from './redux/slices/AppState'
 import {useAppDispatch, useAppSelector } from './hooks/hooks'
-import { Button } from "@material-tailwind/react";
 import {HashRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './components/login/Login';
 import Game from './components/Game';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {app} from './firebase/firebaseConfig'
