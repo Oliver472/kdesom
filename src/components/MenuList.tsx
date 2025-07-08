@@ -24,22 +24,22 @@ export default function MenuList({changeGamemode}:Props) {
     return (
         <Card className="w-full bg-transparent shadow-none">
             <List>
-                <ListItem onClick={()=> handleChangeGamemode(GamemodeEnum.SVK_EASY)} className="shadow-lg">
+                <ListItem onClick={()=> handleChangeGamemode(GamemodeEnum.SVK_EASY)} className="shadow-lg dark:shadow-gray-800">
                     <ListItemPrefix>
                         <img src={svkImage} alt="Slovakia" className="w-10 h-10" />
                     </ListItemPrefix>
                     <div>
-                        <Typography variant="small" color="gray" className="font-normal">
+                        <Typography variant="small" className="font-normal text-gray-600 dark:text-gray-300">
                           Slovensko
                         </Typography>
                     </div>
                 </ListItem>
-                <ListItem onClick={()=> handleChangeGamemode(GamemodeEnum.WORLD)} className="shadow-lg">
+                <ListItem onClick={()=> handleChangeGamemode(GamemodeEnum.WORLD)} className="shadow-lg dark:shadow-gray-800">
                     <ListItemPrefix>
                         <img src={worldImage} alt="Slovakia" className="w-10 h-10" />
                     </ListItemPrefix>
                     <div>
-                        <Typography variant="small" color="gray" className="font-normal">
+                        <Typography variant="small" className="font-normal text-gray-600 dark:text-gray-300">
                            Svet
                         </Typography>
                     </div>

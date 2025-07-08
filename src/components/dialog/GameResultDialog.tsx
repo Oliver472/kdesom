@@ -30,14 +30,14 @@ export default function GameResultDialog({showDialog, closeDialog}: Props) {
 
     return (
         <Dialog open={isOpen} onClose={handleClose} size="md" fullWidth maxWidth={false} disableEscapeKeyDown
-                className="Dialog-Container bg-white bg-opacity-20 backdrop-blur-xl p-1">
-            <DialogHeader className="bg-blue-400  rounded-t-md w-full pb-0">
-                <h1 className="text-center text-2xl font-bold text-black">KONIEC</h1>
+                className="Dialog-Container bg-white dark:bg-gray-800 bg-opacity-20 dark:bg-opacity-30 backdrop-blur-xl p-1">
+            <DialogHeader className="bg-blue-400 dark:bg-blue-600 rounded-t-md w-full pb-0">
+                <h1 className="text-center text-2xl font-bold text-black dark:text-white">KONIEC</h1>
             </DialogHeader>
-            <DialogBody className="bg-blue-400">
+            <DialogBody className="bg-blue-400 dark:bg-blue-600">
 
             </DialogBody>
-            <DialogFooter className="bg-blue-500 rounded-b-md flex justify-center">
+            <DialogFooter className="bg-blue-500 dark:bg-blue-700 rounded-b-md flex justify-center">
                 <Button className="w-52" >GG</Button>
             </DialogFooter>
         </Dialog>

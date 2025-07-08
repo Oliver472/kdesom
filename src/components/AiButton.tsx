@@ -34,7 +34,7 @@ function AiButton({ getClue,tries }: Props) {
                     <h1 className="font-bold text-white">{clue !== "" ? clue : "NÁPOVEDA ? "}</h1>
                 </div>
                 <div>
-                    <p className="text-[8px] text-gray-300 mt-1">USING GEMINI FLASH 1.5</p>
+                    <p className="text-[8px] text-gray-300 dark:text-gray-400 mt-1">USING GEMINI FLASH 1.5</p>
                 </div>
             </div>
         </div>
