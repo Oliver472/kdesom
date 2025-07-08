@@ -7,6 +7,7 @@ import logo from '../../images/guess-logo.png';
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
 import {app} from '../../firebase/firebaseConfig'
+import ThemeToggle from '../ThemeToggle'
 
 function Login() {
     const apps  = app;
@@ -64,19 +65,22 @@ function Login() {
     }, []);
 
     return (
-        <section className="App topo-bg flex justify-center items-center w-screen h-screen relative">
-            <div className=" rounded-md bg-white border border-gray-200 shadow-2xl grid grid-rows-1 lg:grid-cols-2 max-w-[95%] md:max-w-[60%] lg:max-w-[86%] xl:max-w-[860px]  ">
-                <div className="hidden lg:block flex flex-col justify-start items-center p-3 ">
-                    <div className="w-full h-full border rounded-md flex flex-col items-start p-2 ">
-                        <p className="font-black text-blue-500 text-[100px] leading-[8rem]">KDE</p>
-                        <p className="font-black text-blue-500 text-[100px] leading-[6rem] pl-7">SOM?</p>
+        <section className="App topo-bg flex justify-center items-center w-screen h-screen relative bg-gray-100 dark:bg-gray-900">
+            <div className="absolute top-4 right-4 z-10">
+                <ThemeToggle />
+            </div>
+            <div className="rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xl grid grid-rows-1 lg:grid-cols-2 max-w-[95%] md:max-w-[60%] lg:max-w-[86%] xl:max-w-[860px]">
+                <div className="hidden lg:block flex flex-col justify-start items-center p-3">
+                    <div className="w-full h-full border border-gray-200 dark:border-gray-600 rounded-md flex flex-col items-start p-2">
+                        <p className="font-black text-blue-500 dark:text-blue-400 text-[100px] leading-[8rem]">KDE</p>
+                        <p className="font-black text-blue-500 dark:text-blue-400 text-[100px] leading-[6rem] pl-7">SOM?</p>
 
-                        <p className="font-bold text-sm text-center pt-10 mb-auto">
+                        <p className="font-bold text-sm text-center pt-10 mb-auto text-gray-800 dark:text-gray-200">
                             KdeSom je interaktívna hra, ktorá testuje vaše geografické znalosti.
                             Cieľom je určiť polohu na mape na základe Google Street View obrázkov.
                         </p>
 
-                        <p className=" font-normal text-[10px] text-center text-gray-500 ">
+                        <p className="font-normal text-[10px] text-center text-gray-500 dark:text-gray-400">
                             Vážený hráč,
 
                             Naša hra využíva službu Google Street View, ktorá je spoplatnená.
@@ -86,35 +90,35 @@ function Login() {
                         </p>
                     </div>
                 </div>
-                <Card className="p-5 flex-col items-center" color="transparent" shadow={false}>
-                    <Typography variant="h4" color="blue-gray" className="text-center">
+                <Card className="p-5 flex-col items-center bg-white dark:bg-gray-800" color="transparent" shadow={false}>
+                    <Typography variant="h4" className="text-center text-blue-gray-900 dark:text-gray-100">
                         Prihlásiť sa
                     </Typography>
                     <div className="w-full flex justify-center mt-3">
-                      <LockClosedIcon className="w-8 text-blue-700"/>
+                      <LockClosedIcon className="w-8 text-blue-700 dark:text-blue-400"/>
                     </div>
 
                     <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                         <div className="mb-1 flex flex-col gap-6">
-                            <Typography variant="h6" color="blue-gray" className="-mb-3">
+                            <Typography variant="h6" className="-mb-3 text-blue-gray-900 dark:text-gray-100">
                                 Email
                             </Typography>
                             <Input
                                 size="lg"
                                 placeholder="name@mail.com"
-                                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                                className="!border-t-blue-gray-200 dark:!border-t-gray-600 focus:!border-t-gray-900 dark:focus:!border-t-gray-300 text-gray-900 dark:text-gray-100"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
                             />
-                            <Typography variant="h6" color="blue-gray" className="-mb-3">
+                            <Typography variant="h6" className="-mb-3 text-blue-gray-900 dark:text-gray-100">
                                 Heslo
                             </Typography>
                             <Input
                                 type="password"
                                 size="lg"
                                 placeholder="********"
-                                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                                className="!border-t-blue-gray-200 dark:!border-t-gray-600 focus:!border-t-gray-900 dark:focus:!border-t-gray-300 text-gray-900 dark:text-gray-100"
                                 labelProps={{
                                     className: "before:content-none after:content-none",
                                 }}
@@ -125,15 +129,15 @@ function Login() {
                             Prihlásiť sa
                         </Button>
                         <div className="py-4 flex flex-row justify-center items-center">
-                            <div className="h-[1px] w-full border border-gray-300 "></div>
-                            <p className="bg-white px-3">alebo</p>
-                            <div className="h-[1px] w-full border border-gray-300"></div>
+                            <div className="h-[1px] w-full border border-gray-300 dark:border-gray-600"></div>
+                            <p className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3">alebo</p>
+                            <div className="h-[1px] w-full border border-gray-300 dark:border-gray-600"></div>
                         </div>
 
                         <Button
                             variant="outlined"
                             color="blue-gray"
-                            className="flex items-center justify-center gap-3 w-full"
+                            className="flex items-center justify-center gap-3 w-full text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600"
                             onClick={googleSignIn}
                         >
                             <img src="https://docs.material-tailwind.com/icons/google.svg" alt="metamask"
@@ -141,9 +145,9 @@ function Login() {
                             Google login
                         </Button>
                     </form>
-                    <div className="lg:hidden  w-full ">
-                        <div className="h-[1px] w-full border border-gray-300 mb-2 "></div>
-                        <p className="font-normal text-[10px] text-center text-gray-500 ">
+                    <div className="lg:hidden w-full">
+                        <div className="h-[1px] w-full border border-gray-300 dark:border-gray-600 mb-2"></div>
+                        <p className="font-normal text-[10px] text-center text-gray-500 dark:text-gray-400">
                             Vážený hráč,
 
                             Naša hra využíva službu Google Street View, ktorá je spoplatnená.

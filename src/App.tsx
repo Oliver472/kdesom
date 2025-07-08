@@ -5,6 +5,7 @@ import Login from './components/login/Login';
 import Game from './components/Game';
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import {app} from './firebase/firebaseConfig'
+import { setTheme } from './redux/slices/ThemeState'
 
 
 function App() {
@@ -14,6 +15,11 @@ function App() {
     const [isUserSignedIn, setIsUserSignedIn] = React.useState(false);
 
     useEffect(() => {
+        // Initialize theme on app startup
+        const savedTheme = localStorage.getItem('theme')
+        const isDarkMode = savedTheme === 'dark'
+        dispatch(setTheme(isDarkMode))
+        
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setIsUserSignedIn(true);
@@ -22,7 +28,7 @@ function App() {
             }
         });
         return onAuthStateChanged
-    }, []);
+    }, [dispatch, auth]);
 
     return (
         <div className="App">

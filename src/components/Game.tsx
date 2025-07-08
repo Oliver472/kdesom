@@ -18,6 +18,7 @@ import { saveRecordToFirestore } from '../api/apiCalls';
 import LeaderBoardDialog from './dialog/LeaderBoardDialog';
 import { getGeminiContent, getRandomLatLng } from '../gemini/GeminiApi';
 import AiButton from './AiButton';
+import ThemeToggle from './ThemeToggle';
 
 let panorama: google.maps.StreetViewPanorama;
 let map: google.maps.Map;
@@ -317,8 +318,12 @@ function Game() {
     }, [gameMode]);
 
     return (
-        <div className="App flex flex-col justify-center  items-center w-screen h-screen relative overflow-hidden bg-black">
+        <div className="App flex flex-col justify-center  items-center w-screen h-screen relative overflow-hidden bg-black dark:bg-gray-900">
             <section className="w-screen h-screen relative overflow-hidden">
+                <div className="absolute top-5 right-5 !z-[1000] flex gap-2">
+                    <ThemeToggle />
+                </div>
+                
                 {isLoading && (
                     <div className="w-screen h-screen bg-blue-700 flex justify-center items-center bg-opacity-30 transition-all">
                         <div className="w-32">
@@ -332,7 +337,7 @@ function Game() {
                     <img src={guessLogo} alt="logo"/>
                 </div>
                 <div
-                    className={`!z-[9999] absolute right-5 top-[55px] sm:top-5 bg-blue-700 bg-opacity-30 
+                    className={`!z-[9999] absolute right-5 top-[75px] sm:top-[65px] bg-blue-700 bg-opacity-30 
                 rounded-lg p-1  transition-all duration-300 ease-in-out overflow-hidden flex flex-col justify-center items-center
                 ${isMenuOpen ? "w-64 h-52" : "w-14 h-14"}`}>
                     <div className="bg-blue-500 rounded-md w-full h-full p-1">

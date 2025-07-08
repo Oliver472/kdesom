@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appStateReducer from './slices/AppState'
 import gameStateReducer from './slices/GameState'
+import themeStateReducer from './slices/ThemeState'
+
 export default configureStore({
     reducer: {
         appState: appStateReducer,
         gameState: gameStateReducer,
+        theme: themeStateReducer,
     },
 })
 
